@@ -1,3 +1,44 @@
 .map-container{
     border: 1px solid black; // Add a border around the map
 }
+
+.html,body {
+    height:100%
+}
+
+mat-sidenav {
+    width: 100px;
+}
+
+.wrap {
+    border: 1px solid #f0f0f0;
+    margin-bottom: 1rem;
+
+      ::ng-deep {
+        .mat-mdc-tab-group {
+          flex-direction: row;
+        }
+        .mat-mdc-tab-labels {
+          flex-direction: column;
+        }
+        .mat-ink-bar {
+          height: 100%;
+          left: calc(100% - 2px) !important;
+          width: 2px !important;
+        }
+        .mat-tab-header {
+          border-bottom: none;
+        }
+        .mat-tab-body-wrapper {
+          flex: 1 1 auto;
+        }
+        .mat-tab-header-pagination {
+          display: none !important;
+        }
+        .mat-mdc-tab-body-wrapper{
+          width: 100%;
+        }
+      }
+    }
+  
+
