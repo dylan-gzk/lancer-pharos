@@ -69,8 +69,8 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     });
 
     var bounds: any = [
-      [-500, -500],
-      [500, 500],
+      [-720, -1280],
+      [720, 1280],
     ];
     const imageOverlay = L.imageOverlay('assets/khayradin_bg.png', bounds);
     imageOverlay.addTo(this.map);

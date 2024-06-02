@@ -12,11 +12,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips'
-
+import { MatCarouselModule } from '@nunomeirelesjumia/material-carousel';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,MapComponentComponent,MatSelectModule, MatSidenavModule, MatListModule, MatIconModule, MatTooltipModule, MatButtonModule,MatTabsModule,MatChipsModule],
+  imports: [CommonModule, RouterOutlet,MapComponentComponent,MatSelectModule, MatSidenavModule, MatListModule, MatIconModule, MatTooltipModule,
+    MatCarouselModule, MatButtonModule,MatTabsModule,MatChipsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
 })
@@ -31,6 +32,8 @@ export class AppComponent {
     );
   }
   isExpanded:boolean = false
+  displayTabs:boolean = false
+  tabIdx:number = 0
 
 
   @ViewChild(MapComponentComponent) mapComponent!: MapComponentComponent
@@ -48,7 +51,45 @@ export class AppComponent {
   }
 
   displayInfo(){
-    this.isExpanded = !this.isExpanded
+   
+    if(this.tabIdx == 0 && this.isExpanded){
+      this.isExpanded = false
+    }
+    else{
+      this.isExpanded = true
+    }
+    this.tabIdx = 0 
+  }
+
+  displayFactions(){
+    
+    if(this.tabIdx == 1 && this.isExpanded){
+      this.isExpanded = false
+    }
+    else{
+      this.isExpanded = true
+    }
+    this.tabIdx = 1
+  }
+
+  displayLandmarks(){
+    if(this.tabIdx == 2 && this.isExpanded){
+      this.isExpanded = false
+    }
+    else{
+      this.isExpanded = true
+    }
+    this.tabIdx = 2
+  }
+
+  displayVessels(){
+    if(this.tabIdx == 3 && this.isExpanded){
+      this.isExpanded = false
+    }
+    else{
+      this.isExpanded = true
+    }
+    this.tabIdx = 3
   }
   
 }

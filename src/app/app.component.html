@@ -1,28 +1,30 @@
-<mat-drawer-container mode="over" hasBackdrop="false" autosize="true">
-    <mat-drawer #drawer disableClose="true" opened="true" class="{{isExpanded ? '' : '!w-[64px]'}} transition-width ease-linear !bg-zinc-950">
-        <div class="flex flex-row">
-            <div class="flex flex-col space-y-4 items-center">
-                <button mat-button (click)="displayInfo()" class="!text-slate-200">
-                    <mat-icon matListItemIcon>info</mat-icon>
-                </button>
+<div class="flex flex-row">
+<div class="flex flex-row">
+    <div class="flex flex-col space-y-4 items-center bg-zinc-950 border border-r-1 border-l-0 border-y-0 border-slate-200">
+        <button mat-button matTooltip="System Information" (click)="displayInfo()" class="!text-slate-200">
+            <mat-icon matListItemIcon>info</mat-icon>
+        </button>
 
-                <button mat-button class="!text-slate-200">
-                    <mat-icon matListItemIcon>flag</mat-icon>
-                </button>
+        <button mat-button matTooltip="Factions" (click)="displayFactions()" class="!text-slate-200">
+            <mat-icon matListItemIcon>flag</mat-icon>
+        </button>
 
-                <button mat-button class="!text-slate-200">
-                    <mat-icon matListItemIcon svgIcon="station"></mat-icon>
-                </button>
+        <button mat-button matTooltip="Landmarks" (click)="displayLandmarks()"class="!text-slate-200">
+            <mat-icon matListItemIcon svgIcon="station"></mat-icon>
+        </button>
 
-                <button mat-button class="!text-slate-200">
-                    <mat-icon matListItemIcon>rocket_launch</mat-icon>
-                </button>
-                
-                
-            </div>
+        <button mat-button matTooltip="Vessels" (click)="displayVessels()" class="!text-slate-200">
+            <mat-icon matListItemIcon>rocket_launch</mat-icon>
+        </button>
+        
+        
+    </div>
+</div>
 
-            <ng-container *ngIf="isExpanded">
-                <div class="py-2 w-full">
+<mat-drawer-container mode="over" hasBackdrop="false" autosize="true" class="w-full">
+    <mat-drawer #drawer [opened]="isExpanded" class="!bg-zinc-950 header-less-tabs">
+            <mat-tab-group [(selectedIndex)]="tabIdx">
+                <mat-tab [tabIndex]="0">
                     <div class="px-4 text-slate-400 flex flex-col">
                         <div class="text-slate-200">
                             KHAYRADIN
@@ -52,10 +54,40 @@
                         </div>
                         
                     </div>
-                </div>
+                </mat-tab>
+
+                <mat-tab [tabIndex]="1">
+                    <div class="text-slate-400">
+                        Factions
+                    </div>
+
+                    <hr>
+
+
+                </mat-tab>
+
+                <mat-tab [tabIndex]="2">
+                    <div class="text-slate-400">
+                        Landmarks
+                    </div>
+
+                    <hr>
+
+                    
+                </mat-tab>
+
+                <mat-tab [tabIndex]="3">
+                    <div class="text-slate-400">
+                        Vessels
+                    </div>
+
+                    <hr>
+
+                    
+                </mat-tab>
                 
-            </ng-container>
-        </div>
+            </mat-tab-group>
+
         
         
     </mat-drawer>
@@ -66,6 +98,7 @@
 
 
 </mat-drawer-container>
+</div>
 
 
 <ng-template #mapTemplate>
