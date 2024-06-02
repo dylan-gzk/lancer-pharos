@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, AfterViewInit, EventEmitter, Output, Input } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-rotatedmarker';
 import { Ship } from './map-component.model';
@@ -11,6 +11,7 @@ import { Ship } from './map-component.model';
 })
 export class MapComponentComponent implements OnInit, AfterViewInit {
 
+  @Input() markerData : Ship[] = []
   @Output() mapClickEmitter = new EventEmitter<string>
 
   public map!: L.Map;
@@ -22,15 +23,6 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     transform: rotate(45deg);
   `;
 
-  shipArray: Ship[] = [
-  {
-    name:"UNS-CV Chao Praya",
-    rotation:45,
-    position: [200,200],
-    faction:"Union Navy",
-    class:"GMS Amazon-Class"
-  }  
-  ]
 
   spaceshipIcon = new L.Icon({
     iconUrl: 'assets/spaceship.svg',
@@ -89,7 +81,7 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
 
   private addMarkers() {
 
-    this.shipArray.forEach((ship) => {
+    this.markerData.forEach((ship) => {
       this.markers.push(L.marker(ship.position,{ icon: this.spaceshipIcon,title:ship.name })
       .setRotationAngle(ship.rotation)
       .on("click", (e) => {

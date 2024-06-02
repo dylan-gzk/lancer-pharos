@@ -13,6 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips'
 import { MatCarouselModule } from '@nunomeirelesjumia/material-carousel';
+import { Ship } from './map-component/map-component.model';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -30,10 +31,44 @@ export class AppComponent {
       "station",
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/station.svg")
     );
+
+    this.matIconRegistry.addSvgIcon(
+      "union",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/gms.svg")
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      "armory",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/ha.svg")
+    );
   }
   isExpanded:boolean = false
   displayTabs:boolean = false
   tabIdx:number = 0
+
+  activeShip!: Ship | null;
+
+  logos: Record<string,string> = {
+    "Union Navy":'union',
+    "Harrison Armory":'armory'
+  }
+
+  markerData: Ship[] =  [
+    {
+      name:"UNS-CV Chao Praya",
+      rotation:45,
+      position: [200,200],
+      faction:"Union Navy",
+      class:"GMS Amazon-Class Carrier"
+    }  ,
+    {
+      name:"PCV-SL Atalanta",
+      rotation:12,
+      position: [-200,200],
+      faction:"Harrison Armory",
+      class:"HA Wagner-Class Corvette"
+    }
+    ]
 
 
   @ViewChild(MapComponentComponent) mapComponent!: MapComponentComponent
@@ -48,6 +83,9 @@ export class AppComponent {
 
   handleMapClick(event:string){
     console.log(event)
+    this.displayVessels()
+    this.isExpanded = true
+    this.activeShip = this.markerData.find(e => e.name === event) || null
   }
 
   displayInfo(){
@@ -90,6 +128,16 @@ export class AppComponent {
       this.isExpanded = true
     }
     this.tabIdx = 3
+  }
+
+  getActiveShipIcon(){
+    if(this.activeShip && this.activeShip.faction){
+      return this.logos[this.activeShip.faction]
+
+    }
+    else{
+      return '';
+    }
   }
   
 }
