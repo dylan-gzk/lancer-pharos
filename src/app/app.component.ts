@@ -88,6 +88,8 @@ export class AppComponent {
   @ViewChild(MapComponentComponent) mapComponent!: MapComponentComponent
 
   ngAfterViewInit(){
+    this.isExpanded = true
+    this.tabIdx = 0
   }
 
   flyToLandmark(){
