@@ -32,16 +32,22 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/station.svg")
     );
 
-    this.matIconRegistry.addSvgIcon(
-      "union",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/gms.svg")
-    );
-
-    this.matIconRegistry.addSvgIcon(
-      "armory",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/ha.svg")
-    );
+    for (const key in this.iconStrings){
+      const data = this.iconStrings[key]
+      this.matIconRegistry.addSvgIcon(
+        key,this.domSanitizer.bypassSecurityTrustResourceUrl(data)
+      )
+    }
   }
+
+  iconStrings: Record<string,string> = {
+    "union":"assets/gms.svg",
+    "armory":"assets/ha.svg",
+    "barony":"assets/barony.svg",
+    "albatross":"assets/albatross.svg",
+    "ssc":"assets/ssc.svg"
+  }
+
   isExpanded:boolean = false
   displayTabs:boolean = false
   tabIdx:number = 0
@@ -50,7 +56,8 @@ export class AppComponent {
 
   logos: Record<string,string> = {
     "Union Navy":'union',
-    "Harrison Armory":'armory'
+    "Harrison Armory":'armory',
+    "SSC":'ssc'
   }
 
   markerData: Ship[] =  [
@@ -67,6 +74,13 @@ export class AppComponent {
       position: [-200,200],
       faction:"Harrison Armory",
       class:"HA Wagner-Class Corvette"
+    },
+    {
+      name:"C-HK Auburn Heart",
+      rotation: 75,
+      position: [200,-200],
+      faction:"SSC",
+      class:"SSC Empyrean-Class Skyhook"
     }
     ]
 
@@ -74,7 +88,6 @@ export class AppComponent {
   @ViewChild(MapComponentComponent) mapComponent!: MapComponentComponent
 
   ngAfterViewInit(){
-    console.log(this.mapComponent)
   }
 
   flyToLandmark(){
@@ -84,8 +97,9 @@ export class AppComponent {
   handleMapClick(event:string){
     console.log(event)
     this.displayVessels()
-    this.isExpanded = true
     this.activeShip = this.markerData.find(e => e.name === event) || null
+    this.tabIdx=3
+    this.isExpanded = true
   }
 
   displayInfo(){
@@ -93,10 +107,12 @@ export class AppComponent {
     if(this.tabIdx == 0 && this.isExpanded){
       this.isExpanded = false
     }
+
     else{
+      this.tabIdx = 0 
       this.isExpanded = true
     }
-    this.tabIdx = 0 
+   
   }
 
   displayFactions(){
@@ -105,9 +121,10 @@ export class AppComponent {
       this.isExpanded = false
     }
     else{
+      this.tabIdx = 1
       this.isExpanded = true
     }
-    this.tabIdx = 1
+    
   }
 
   displayLandmarks(){
@@ -115,19 +132,22 @@ export class AppComponent {
       this.isExpanded = false
     }
     else{
+      this.tabIdx = 2
       this.isExpanded = true
     }
-    this.tabIdx = 2
+   
   }
 
   displayVessels(){
-    if(this.tabIdx == 3 && this.isExpanded){
+    if(this.tabIdx == 3 && this.isExpanded && !this.activeShip){
       this.isExpanded = false
     }
     else{
+      this.tabIdx = 3
       this.isExpanded = true
+      this.activeShip = null
     }
-    this.tabIdx = 3
+    
   }
 
   getActiveShipIcon(){

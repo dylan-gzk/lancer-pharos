@@ -31,9 +31,15 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     iconSize: [64, 64],
   });
 
+  spaceshipIconSmall = new L.Icon({
+    iconUrl: 'assets/spaceship.svg',
+    shadowSize: [0, 0],
+
+    iconSize: [32, 32],
+  });
+
   markers: L.Marker[] = [
-    L.marker([31.9539, 35.9106], { icon: this.spaceshipIcon }), // Amman
-    L.marker([32.5568, 35.8469], { icon: this.spaceshipIcon }), // Irbid
+    
   ];
 
   constructor() {}
@@ -74,9 +80,9 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
   }
 
   onClick(event:L.LeafletMouseEvent){
-    console.log(event)
     this.map.flyTo(event.latlng,2)
     this.mapClickEmitter.emit(event.target.options.title)
+    event.target._icon.classList = "ha-marker"
   }
 
   private addMarkers() {
@@ -102,5 +108,11 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       fillOpacity: 0.5,
       radius: 20,
     }).addTo(this.map);
+
+    this.map.on("zoomend",(map) => {
+      console.log(map)
+    })
+    
   }
+
 }
