@@ -14,6 +14,8 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
   @Input() markerData : Ship[] = []
   @Output() mapClickEmitter = new EventEmitter<string>
 
+  readonly spaceship_small = 'assets/spaceship.svg'
+
   public map!: L.Map;
 
   customColor = ' #FF0000';
@@ -24,6 +26,7 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
   `;
 
 
+
   spaceshipIcon = new L.Icon({
     iconUrl: 'assets/spaceship.svg',
     shadowSize: [0, 0],
@@ -32,7 +35,7 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
   });
 
   spaceshipIconSmall = new L.Icon({
-    iconUrl: 'assets/spaceship.svg',
+    iconUrl: 'assets/spaceship-half.svg',
     shadowSize: [0, 0],
 
     iconSize: [32, 32],
@@ -41,6 +44,8 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
   markers: L.Marker[] = [
     
   ];
+
+
 
   constructor() {}
 
@@ -86,15 +91,16 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
   }
 
   private addMarkers() {
-
     this.markerData.forEach((ship) => {
       this.markers.push(L.marker(ship.position,{ icon: this.spaceshipIcon,title:ship.name })
       .setRotationAngle(ship.rotation)
       .on("click", (e) => {
         this.onClick(e)
-      }
-      ))
+      })
+      
+      )
     })
+
 
     // Add your markers to the map
     this.markers.forEach((marker) => {
@@ -109,8 +115,19 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       radius: 20,
     }).addTo(this.map);
 
-    this.map.on("zoomend",(map) => {
-      console.log(map)
+    this.map.on("zoomend",(event) => {
+      console.log(event)
+      let currentZoom = this.map.getZoom()
+      if(currentZoom == 0){
+        this.markers.forEach((marker) => {
+          marker.setIcon(this.spaceshipIconSmall)
+        })
+      }
+      else{
+        this.markers.forEach((marker) => {
+          marker.setIcon(this.spaceshipIcon)
+        })
+      }
     })
     
   }
