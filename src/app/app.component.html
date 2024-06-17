@@ -30,7 +30,7 @@
                             KHAYRADIN
                         </div>
                         <div>
-                            KHAYRADIN//ANTARES-3
+                            KHAYRADIN//APHERION-3
                         </div>
                         
                         <hr>
@@ -87,7 +87,7 @@
         
                             <hr>
 
-                            <ng-container *ngFor="let ship of markerData">
+                            <ng-container *ngFor="let ship of shipMarkerData">
                                 <div class="text-slate-200 ">
                                     <div>
                                         {{ship?.name}}
@@ -102,7 +102,7 @@
                     </ng-container>
 
                     <ng-template #shipDetails>
-                        <div class="pl-2">
+                        <div class="pl-2 flex flex-col">
                             <div class="flex flex-row">
                                 <div class="self-center pr-3 pt-2">
                                     <mat-icon matListItemIcon [svgIcon]="getActiveShipIcon()" class="!fill-slate-200 scale-[200%]">
@@ -117,10 +117,19 @@
                                         {{activeShip?.class}}
                                     </div>
                                 </div>
+
                             </div>
                             
                             <hr>
-                           
+
+                            <mat-chip class="my-2 !bg-white !text-white self-center">{{activeShip?.battlegroup}}</mat-chip>
+
+                            <div *ngIf="activeShip?.homeport">
+                                <span class="text-slate-200">Home Port</span>
+                                <div class="text-slate-400">
+                                    {{activeShip?.homeport}}
+                                </div>
+                            </div>
                         </div>
                     </ng-template>
                     
@@ -143,7 +152,7 @@
 
 <ng-template #mapTemplate>
     <div class="map-container">
-        <app-map-component [markerData]="markerData"(mapClickEmitter)="handleMapClick($event)"></app-map-component>
+        <app-map-component [markerData]="shipMarkerData" [landmarkData]="landmarkMarkerData" (mapClickEmitter)="handleMapClick($event)" (landmarkClickEmitter)="handleLandmarkClick($event)"></app-map-component>
     </div>
 </ng-template>
 

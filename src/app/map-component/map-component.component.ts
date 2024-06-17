@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, EventEmitter, Output, Input } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-rotatedmarker';
-import { Ship } from './map-component.model';
+import { Landmark, Ship } from './map-component.model';
 
 @Component({
   selector: 'app-map-component',
@@ -12,7 +12,9 @@ import { Ship } from './map-component.model';
 export class MapComponentComponent implements OnInit, AfterViewInit {
 
   @Input() markerData : Ship[] = []
+  @Input() landmarkData: Landmark[] = []
   @Output() mapClickEmitter = new EventEmitter<string>
+  @Output() landmarkClickEmitter = new EventEmitter<string>
 
   readonly spaceship_small = 'assets/spaceship.svg'
 
@@ -25,20 +27,25 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     transform: rotate(45deg);
   `;
 
-
-
   spaceshipIcon = new L.Icon({
     iconUrl: 'assets/spaceship.svg',
     shadowSize: [0, 0],
 
-    iconSize: [64, 64],
+    iconSize: [48, 48],
   });
 
   spaceshipIconSmall = new L.Icon({
-    iconUrl: 'assets/spaceship-half.svg',
+    iconUrl: 'assets/spaceship.svg',
     shadowSize: [0, 0],
 
-    iconSize: [32, 32],
+    iconSize: [24,24],
+  });
+
+  landmarkIcon = new L.Icon({
+    iconUrl: 'assets/landmark.svg',
+    shadowSize: [0, 0],
+
+    iconSize: [24,24],
   });
 
   markers: L.Marker[] = [
@@ -87,12 +94,23 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
   onClick(event:L.LeafletMouseEvent){
     this.map.flyTo(event.latlng,2)
     this.mapClickEmitter.emit(event.target.options.title)
-    event.target._icon.classList = "ha-marker"
+  }
+
+  onLandmarkClick(event:L.LeafletMouseEvent){
+    this.map.flyTo(event.latlng,2)
+    this.mapClickEmitter.emit(event.target.options.title)
   }
 
   private addMarkers() {
     this.markerData.forEach((ship) => {
-      this.markers.push(L.marker(ship.position,{ icon: this.spaceshipIcon,title:ship.name })
+      let icon:L.Icon
+      if(ship?.subliner){
+        icon = this.spaceshipIconSmall
+      }
+      else{
+        icon = this.spaceshipIcon
+      }
+      this.markers.push(L.marker(ship.position,{ icon: icon,title:ship.name })
       .setRotationAngle(ship.rotation)
       .on("click", (e) => {
         this.onClick(e)
@@ -101,6 +119,12 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       )
     })
 
+    this.landmarkData.forEach((landmark) => {
+      this.markers.push(L.marker(landmark.position,{icon:this.landmarkIcon,title:landmark.name})
+      .on("click",(e)=>{
+        this.onLandmarkClick(e)
+      }))
+    })
 
     // Add your markers to the map
     this.markers.forEach((marker) => {
@@ -116,18 +140,7 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     }).addTo(this.map);
 
     this.map.on("zoomend",(event) => {
-      console.log(event)
-      let currentZoom = this.map.getZoom()
-      if(currentZoom == 0){
-        this.markers.forEach((marker) => {
-          marker.setIcon(this.spaceshipIconSmall)
-        })
-      }
-      else{
-        this.markers.forEach((marker) => {
-          marker.setIcon(this.spaceshipIcon)
-        })
-      }
+      
     })
     
   }

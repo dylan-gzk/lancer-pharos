@@ -13,7 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips'
 import { MatCarouselModule } from '@nunomeirelesjumia/material-carousel';
-import { Ship } from './map-component/map-component.model';
+import { Landmark, Ship } from './map-component/map-component.model';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -57,22 +57,26 @@ export class AppComponent {
   logos: Record<string,string> = {
     "Union Navy":'union',
     "Harrison Armory":'armory',
-    "SSC":'ssc'
+    "SSC":'ssc',
+    "Albatross":"albatross"
   }
 
-  markerData: Ship[] =  [
+  shipMarkerData: Ship[] =  [
     {
       name:"UNS-CV Chao Praya",
       rotation:45,
       position: [200,200],
       faction:"Union Navy",
-      class:"GMS Amazon-Class Carrier"
+      battlegroup:"Battlegroup Granite, 1st Apherion Fleet",
+      class:"GMS Amazon-Class Carrier",
+      homeport:"Edibiri Omninode"
     }  ,
     {
       name:"PCV-SL Atalanta",
       rotation:12,
       position: [-200,200],
       faction:"Harrison Armory",
+      battlegroup:"",
       class:"HA Wagner-Class Corvette"
     },
     {
@@ -80,9 +84,27 @@ export class AppComponent {
       rotation: 75,
       position: [200,-200],
       faction:"SSC",
+      battlegroup:"M.Coronet",
       class:"SSC Empyrean-Class Skyhook"
+    },
+    {
+      name:"ALB-SS Gienah-Srirano",
+      rotation:12,
+      position: [280,150],
+      faction:"Albatross",
+      battlegroup:"Srirano Detachment 2",
+      class:"IPS-N Alexandria-Class Corvette, Makteba Custom",
+      subliner:true
     }
-    ]
+  ]
+
+  landmarkMarkerData: Landmark[] = [
+    {
+      name: "Edibiri Omninode",
+      position: [50,50],
+      faction:"Union Navy"
+    }
+  ]
 
 
   @ViewChild(MapComponentComponent) mapComponent!: MapComponentComponent
@@ -99,9 +121,13 @@ export class AppComponent {
   handleMapClick(event:string){
     console.log(event)
     this.displayVessels()
-    this.activeShip = this.markerData.find(e => e.name === event) || null
+    this.activeShip = this.shipMarkerData.find(e => e.name === event) || null
     this.tabIdx=3
     this.isExpanded = true
+  }
+
+  handleLandmarkClick(event:string){
+    console.log(event)
   }
 
   displayInfo(){
