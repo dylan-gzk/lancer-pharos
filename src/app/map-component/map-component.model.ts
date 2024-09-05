@@ -7,10 +7,13 @@ export interface Ship {
     class:string
     homeport?:string
     subliner?:boolean
+    color?:string
 }
 
 export interface Landmark {
     name:string
+    class:string
     position:[number,number]
     faction:string
+    landmarkType?:string
 }

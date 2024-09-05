@@ -53,6 +53,7 @@ export class AppComponent {
   tabIdx:number = 0
 
   activeShip!: Ship | null;
+  activeLandmark!: Landmark | null;
 
   logos: Record<string,string> = {
     "Union Navy":'union',
@@ -69,7 +70,8 @@ export class AppComponent {
       faction:"Union Navy",
       battlegroup:"Battlegroup Granite, 1st Apherion Fleet",
       class:"GMS Amazon-Class Carrier",
-      homeport:"Edibiri Omninode"
+      homeport:"Edibiri Omninode",
+      color:"union"
     }  ,
     {
       name:"PCV-SL Atalanta",
@@ -77,7 +79,8 @@ export class AppComponent {
       position: [-200,200],
       faction:"Harrison Armory",
       battlegroup:"",
-      class:"HA Wagner-Class Corvette"
+      class:"HA Wagner-Class Corvette",
+      color:"ha"
     },
     {
       name:"C-HK Auburn Heart",
@@ -85,7 +88,8 @@ export class AppComponent {
       position: [200,-200],
       faction:"SSC",
       battlegroup:"M.Coronet",
-      class:"SSC Empyrean-Class Skyhook"
+      class:"SSC Empyrean-Class Skyhook",
+      color:"ssc"
     },
     {
       name:"ALB-SS Gienah-Srirano",
@@ -94,6 +98,7 @@ export class AppComponent {
       faction:"Albatross",
       battlegroup:"Srirano Detachment 2",
       class:"IPS-N Alexandria-Class Corvette, Makteba Custom",
+      color:"albatross",
       subliner:true
     }
   ]
@@ -101,6 +106,7 @@ export class AppComponent {
   landmarkMarkerData: Landmark[] = [
     {
       name: "Edibiri Omninode",
+      class: "UOB Central Omninode",
       position: [50,50],
       faction:"Union Navy"
     }
@@ -128,6 +134,10 @@ export class AppComponent {
 
   handleLandmarkClick(event:string){
     console.log(event)
+    this.displayLandmarks()
+    this.activeLandmark = this.landmarkMarkerData.find(e => e.name === event) || null
+    this.tabIdx = 2
+    this.isExpanded = true
   }
 
   displayInfo(){
@@ -181,6 +191,16 @@ export class AppComponent {
   getActiveShipIcon(){
     if(this.activeShip && this.activeShip.faction){
       return this.logos[this.activeShip.faction]
+
+    }
+    else{
+      return '';
+    }
+  }
+
+  getActiveLandmarkIcon(){
+    if(this.activeLandmark && this.activeLandmark.faction){
+      return this.logos[this.activeLandmark.faction]
 
     }
     else{
