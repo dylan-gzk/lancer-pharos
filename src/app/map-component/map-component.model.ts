@@ -7,7 +7,7 @@ export interface Ship {
     class:string
     homeport?:string
     subliner?:boolean
-    color?:string
+    color:string
 }
 
 export interface Landmark {

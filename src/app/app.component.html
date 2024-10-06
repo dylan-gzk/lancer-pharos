@@ -1,18 +1,18 @@
 <div class="flex flex-row">
-    <div class="flex flex-col space-y-4 items-center bg-zinc-950 border border-r-1 border-l-0 border-y-0 border-slate-200 max-w-min">
-        <button mat-button matTooltip="System Information" (click)="displayInfo()" class="!text-slate-200 !bg-cyan-600 sidebar-pharos-buttons flex flex-col">
+    <div class="flex flex-col space-y-4 items-center bg-zinc-900 border border-r-1 border-l-0 border-y-0 border-slate-200 max-w-min px-2 pt-2">
+        <button mat-icon-button matTooltip="System Information" (click)="displayInfo()" class="{{tabIdx==0 && isExpanded ? '!text-[#08d2d2] !bg-[#1e3f3f]': '!text-slate-200'}} sidebar-pharos-buttons flex flex-col">
             <mat-icon matListItemIcon class="self-center">info</mat-icon>
         </button>
 
-        <button mat-button matTooltip="Factions" (click)="displayFactions()" class="!text-slate-200 !bg-cyan-600 sidebar-pharos-buttons flex flex-col">
+        <button mat-icon-button matTooltip="Factions" (click)="displayFactions()" class="{{tabIdx==1 && isExpanded ? '!text-[#08d2d2] !bg-[#1e3f3f]': '!text-slate-200'}} sidebar-pharos-buttons flex flex-col">
             <mat-icon matListItemIcon class="self-center">flag</mat-icon>
         </button>
 
-        <button mat-button matTooltip="Landmarks" (click)="displayLandmarks()"class="!text-slate-200 !bg-cyan-600 sidebar-pharos-buttons flex flex-col">
+        <button mat-icon-button matTooltip="Landmarks" (click)="displayLandmarks()" class="{{tabIdx==2 && isExpanded ? '!text-[#08d2d2] !bg-[#1e3f3f]': '!text-slate-200'}} fill-none sidebar-pharos-buttons flex flex-col">
             <mat-icon matListItemIcon class="self-center" svgIcon="station"></mat-icon>
         </button>
 
-        <button mat-button matTooltip="Vessels" (click)="displayVessels()" class="!text-slate-200 !bg-cyan-500 sidebar-pharos-buttons flex flex-col">
+        <button mat-icon-button matTooltip="Vessels" (click)="displayVessels()" class="{{tabIdx==3 && isExpanded ? '!text-[#08d2d2] !bg-[#1e3f3f]': '!text-slate-200'}} sidebar-pharos-buttons flex flex-col">
             <mat-icon matListItemIcon class="self-center">rocket_launch</mat-icon>
         </button>
         
@@ -20,7 +20,7 @@
     </div>
 
     <mat-drawer-container mode="over" hasBackdrop="false" autosize="true" class="w-full">
-        <mat-drawer #drawer [opened]="isExpanded" class="!bg-zinc-950 header-less-tabs">
+        <mat-drawer #drawer [opened]="isExpanded" class="!bg-zinc-900 header-less-tabs">
                 <mat-tab-group [(selectedIndex)]="tabIdx">
                     <mat-tab [tabIndex]="0">
                         <div class="px-4 text-slate-400 flex flex-col text-lg space-y-1 overflow-hidden">

@@ -27,11 +27,7 @@ export class AppComponent {
     private matIconRegistry:MatIconRegistry,
     private domSanitizer: DomSanitizer
   ){
-    this.matIconRegistry.addSvgIcon(
-      "station",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/station.svg")
-    );
-
+ 
     for (const key in this.iconStrings){
       const data = this.iconStrings[key]
       this.matIconRegistry.addSvgIcon(
@@ -40,12 +36,19 @@ export class AppComponent {
     }
   }
 
+  svgStrings = ["station","diamond-x","triangle","star"]
+
   iconStrings: Record<string,string> = {
     "union":"assets/gms.svg",
     "armory":"assets/ha.svg",
     "barony":"assets/barony.svg",
     "albatross":"assets/albatross.svg",
-    "ssc":"assets/ssc.svg"
+    "ssc":"assets/ssc.svg",
+    "station": "assets/station.svg",
+    "diamond-x": "assets/diamond-x.svg",
+    "triangle": "assets/triangle.svg",
+    "star": "assets/star.svg",
+
   }
 
   isExpanded:boolean = false
@@ -65,8 +68,8 @@ export class AppComponent {
   shipMarkerData: Ship[] =  [
     {
       name:"UNS-CV Chao Praya",
-      rotation:45,
-      position: [200,200],
+      rotation:-135,
+      position: [380,380],
       faction:"Union Navy",
       battlegroup:"Battlegroup Granite, 1st Apherion Fleet",
       class:"GMS Amazon-Class Carrier",
@@ -85,7 +88,7 @@ export class AppComponent {
     {
       name:"C-HK Auburn Heart",
       rotation: 75,
-      position: [200,-200],
+      position: [80,-280],
       faction:"SSC",
       battlegroup:"M.Coronet",
       class:"SSC Empyrean-Class Skyhook",
@@ -107,7 +110,7 @@ export class AppComponent {
     {
       name: "Edibiri Omninode",
       class: "UOB Central Omninode",
-      position: [50,50],
+      position: [400,400],
       faction:"Union Navy"
     }
   ]
