@@ -48,6 +48,7 @@ export class AppComponent {
     "diamond-x": "assets/diamond-x.svg",
     "triangle": "assets/triangle.svg",
     "star": "assets/star.svg",
+    "spear":"assets/spear.svg"
 
   }
 
@@ -81,7 +82,7 @@ export class AppComponent {
       rotation:12,
       position: [-200,200],
       faction:"Harrison Armory",
-      battlegroup:"",
+      battlegroup:"???",
       class:"HA Wagner-Class Corvette",
       color:"ha"
     },
@@ -112,6 +113,31 @@ export class AppComponent {
       class: "UOB Central Omninode",
       position: [400,400],
       faction:"Union Navy"
+    },
+    {
+      name: "Uinta Station",
+      class: "House of Stone/Sand Blink Gate",
+      position: [-300,300],
+      faction:"Union Navy",
+      landmarkType:"station",
+      description:`The system of Apherion was the second Karrakin system to recieve a blink gate in 3218u, serving the worlds of Khayradin and Tilimsan. Uinta Station soon became 
+      the busiest port within Union space, with thousands of ships passing through its gate daily, ferrying millions of tonnes of resources to and from the resource-rich worlds and moons
+      of Apherion, lining the pockets of Hagiographic nobility.
+            
+      Across its six habitation rings, the station is home to over three million Karrakin citizens, facilitating the station's operations across its many bazaars, refineries, and brokerages. 
+      After Baronic Unified Command's sudden assault to take control of the station, the Stonelord has put the full focus of the station into returning the shipyard to full strength to replenish 
+      the Baronic Navy's depleted fleets. During the Uinta Station Incident, the station's blinkspace capabilities were significantly damaged, and will take months of repairs from specialized 
+      engineers to return to full operation. Until then, Stonelord Cannamos and his naval forces are trapped in the system, and have since put his focus into rebuilding strength and pacifying
+      opposing factions on Khayradin.
+
+      `
+    },
+    {
+      name: "Bastion diKhayradi",
+      class: "House of Stone Orbital Defence Platform",
+      position: [50,-50],
+      faction:"House of Stone",
+      landmarkType:"station",
     }
   ]
 

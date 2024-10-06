@@ -62,6 +62,44 @@
 
                         <hr>
 
+                        <div class="px-4 pt-4 text-white flex flex-col space-y-2">
+                            <div class="flex flex-row items-center space-x-2">
+                                <mat-icon matListItemIcon class="self-center !h-8 !w-8 text-red-500" svgIcon="union"></mat-icon>
+                                <div>
+                                    Union Navy
+                                </div>
+                            </div>
+
+                            <div class="flex flex-row items-center space-x-2">
+                                <mat-icon matListItemIcon class="self-center !h-8 !w-8 text-cyan-400" svgIcon="albatross"></mat-icon>
+                                <div>
+                                    Albatross
+                                </div>
+                            </div>
+
+                            <div class="flex flex-row items-center space-x-2">
+                                <mat-icon matListItemIcon class="self-center !h-8 !w-8 text-purple-400" svgIcon="barony"></mat-icon>
+                                <div>
+                                    Baronic Unified Command
+                                </div>
+                            </div>
+
+                            <div class="flex flex-row items-center space-x-2">
+                                <mat-icon matListItemIcon class="self-center !h-8 !w-8 text-yellow-400" svgIcon="ssc"></mat-icon>
+                                <div>
+                                    Smith-Shimano Corpro
+                                </div>
+                            </div>
+
+                            <div class="flex flex-row items-center space-x-2">
+                                <mat-icon matListItemIcon class="self-center !h-8 !w-8 text-orange-400" svgIcon="spear"></mat-icon>
+                                <div>
+                                    Children Of Tyrannus
+                                </div>
+                            </div>
+
+                        </div>
+
 
                     </mat-tab>
 
@@ -91,10 +129,15 @@
                                             {{activeLandmark?.class}}
                                         </div>
                                     </div>
-
+                        
                                 </div>
                                 
                                 <hr>
+
+                                <div class="text-slate-200 text-sm">
+                                    {{activeLandmark?.description}}
+                                </div>
+
                             </div>
                         </ng-template>
 

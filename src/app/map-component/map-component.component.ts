@@ -133,7 +133,7 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       
       let size:number
       
-      size = ship?.subliner ? 24 : 36
+      size = ship?.subliner ? 18 : 24
 
       let shipHTML = `
 
@@ -168,18 +168,26 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
 
     let landmarkHtml = `
       <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-      <svg width="48px" height="48px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path style="stroke:#00FF00;fill-rule:nonzero;fill:none;fill-opacity:1;" d="M4.26244 14.2628C3.47041 13.4707 3.07439 13.0747 2.92601 12.618C2.7955 12.2164 2.7955 11.7837 2.92601 11.382C3.07439 10.9253 3.47041 10.5293 4.26244 9.73727L9.73703 4.26268C10.5291 3.47065 10.9251 3.07463 11.3817 2.92626C11.7834 2.79574 12.2161 2.79574 12.6178 2.92626C13.0745 3.07463 13.4705 3.47065 14.2625 4.26268L19.7371 9.73727C20.5291 10.5293 20.9251 10.9253 21.0735 11.382C21.204 11.7837 21.204 12.2164 21.0735 12.618C20.9251 13.0747 20.5291 13.4707 19.7371 14.2628L14.2625 19.7373C13.4705 20.5294 13.0745 20.9254 12.6178 21.0738C12.2161 21.2043 11.7834 21.2043 11.3817 21.0738C10.9251 20.9254 10.5291 20.5294 9.73703 19.7373L4.26244 14.2628Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     `
 
-    let htmlLandmarkIcon = new L.DivIcon({
-      html:landmarkHtml,
-      shadowSize:[0,0],
-      className:''
-    })
+    let landmarkCrossHtml = `
+      <?xml version="1.0" encoding="utf-8"?>
+      <svg width="36px" height="36px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path style="stroke:#FFBF00;fill-rule:nonzero;fill:none;fill-opacity:1;" d="M12 3L14.0357 8.16153C14.2236 8.63799 14.3175 8.87622 14.4614 9.0771C14.5889 9.25516 14.7448 9.41106 14.9229 9.53859C15.1238 9.68245 15.362 9.77641 15.8385 9.96432L21 12L15.8385 14.0357C15.362 14.2236 15.1238 14.3175 14.9229 14.4614C14.7448 14.5889 14.5889 14.7448 14.4614 14.9229C14.3175 15.1238 14.2236 15.362 14.0357 15.8385L12 21L9.96432 15.8385C9.77641 15.362 9.68245 15.1238 9.53859 14.9229C9.41106 14.7448 9.25516 14.5889 9.0771 14.4614C8.87622 14.3175 8.63799 14.2236 8.16153 14.0357L3 12L8.16153 9.96432C8.63799 9.77641 8.87622 9.68245 9.0771 9.53859C9.25516 9.41106 9.41106 9.25516 9.53859 9.0771C9.68245 8.87622 9.77641 8.63799 9.96432 8.16153L12 3Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    `
+
+    
 
     this.landmarkData.forEach((landmark) => {
+      let htmlLandmarkIcon = new L.DivIcon({
+        html: landmark?.landmarkType==="station" ? landmarkCrossHtml : landmarkHtml,
+        shadowSize:[0,0],
+        className:''
+      })
       this.markers.push(L.marker(landmark.position,{icon:htmlLandmarkIcon,title:landmark.name})
       .on("click",(e)=>{
         this.onLandmarkClick(e)
@@ -192,21 +200,33 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       //marker.setRotationAngle(45)
     });
 
-    var circle = L.circle([250,-250], {
+    var circle = L.circle([200,-200], {
       color: 'red',
       fillColor: '#f03',
       fillOpacity: 0.5,
-      radius: 128,
+      radius: 160,
     }).bindTooltip("Khayradin",{permanent:true,direction:'center'})
     .addTo(this.map);
 
-    L.circle([-400,600], {
+    L.circle([-600,1000], {
       color: 'orange',
       fillColor: '#f30',
       fillOpacity: 0.5,
       radius: 64,
     }).bindTooltip("Tilimsan",{permanent:true,direction:'center'})
     .addTo(this.map);
+
+    L.circle([-100, -500], {
+      color: 'blue',
+      fillColor: '#03f',
+      fillOpacity: 0.5,
+      radius: 64,
+    }).bindTooltip("Free Sanjak",{permanent:true,direction:'center'})
+    .addTo(this.map);
+
+    
+
+
 
     this.map.on("zoomend",(event) => {
       

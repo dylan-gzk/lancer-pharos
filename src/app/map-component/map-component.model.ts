@@ -16,4 +16,5 @@ export interface Landmark {
     position:[number,number]
     faction:string
     landmarkType?:string
+    description?:string
 }
