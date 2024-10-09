@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "page-deploy":"ng deploy --repo=https://github.com/dylan-gzk/lancer-pharos.git"
+    "page-deploy":"ng deploy --name='dylan-gzk'"
   },
   "private": true,
   "dependencies": {
