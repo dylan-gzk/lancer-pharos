@@ -21,9 +21,15 @@ jobs:
       #  run: |
       #    npm ci --legacy-peer-deps
       #    npm run page-deploy
+      - name: Build
+        run: |
+          npm ci --legacy-peer-deps
+          npm build
+        
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.4.2
-            
+        with:
+          path: './dist/lancer-pharos/'
       - name: Deploy
         uses: actions/deploy-pages@v4.0.5
             
