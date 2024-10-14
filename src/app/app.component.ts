@@ -14,6 +14,17 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips'
 import { MatCarouselModule } from '@nunomeirelesjumia/material-carousel';
 import { Landmark, Ship } from './map-component/map-component.model';
+import { shipMarkerData, landmarkMarkerData, logos } from './app.data';
+import { PharosInfoComponent } from './pharos-info/pharos-info.component';
+
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -25,7 +36,8 @@ import { Landmark, Ship } from './map-component/map-component.model';
 export class AppComponent {
   constructor(
     private matIconRegistry:MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private dialog: MatDialog
   ){
  
     for (const key in this.iconStrings){
@@ -35,6 +47,8 @@ export class AppComponent {
       )
     }
   }
+
+  readonly logos = logos
 
   svgStrings = ["station","diamond-x","triangle","star"]
 
@@ -48,7 +62,8 @@ export class AppComponent {
     "diamond-x": "assets/diamond-x.svg",
     "triangle": "assets/triangle.svg",
     "star": "assets/star.svg",
-    "spear":"assets/spear.svg"
+    "spear":"assets/spear.svg",
+    "alpha":"assets/alpha.svg"
 
   }
 
@@ -59,87 +74,9 @@ export class AppComponent {
   activeShip!: Ship | null;
   activeLandmark!: Landmark | null;
 
-  logos: Record<string,string> = {
-    "Union Navy":'union',
-    "Harrison Armory":'armory',
-    "SSC":'ssc',
-    "Albatross":"albatross"
-  }
+  shipMarkerData: Ship[] = shipMarkerData
 
-  shipMarkerData: Ship[] =  [
-    {
-      name:"UNS-CV Chao Praya",
-      rotation:-135,
-      position: [380,380],
-      faction:"Union Navy",
-      battlegroup:"Battlegroup Granite, 1st Apherion Fleet",
-      class:"GMS Amazon-Class Carrier",
-      homeport:"Edibiri Omninode",
-      color:"union"
-    }  ,
-    {
-      name:"PCV-SL Atalanta",
-      rotation:12,
-      position: [-200,200],
-      faction:"Harrison Armory",
-      battlegroup:"???",
-      class:"HA Wagner-Class Corvette",
-      color:"ha"
-    },
-    {
-      name:"C-HK Auburn Heart",
-      rotation: 75,
-      position: [80,-280],
-      faction:"SSC",
-      battlegroup:"M.Coronet",
-      class:"SSC Empyrean-Class Skyhook",
-      color:"ssc"
-    },
-    {
-      name:"ALB-SS Gienah-Srirano",
-      rotation:12,
-      position: [280,150],
-      faction:"Albatross",
-      battlegroup:"Srirano Detachment 2",
-      class:"IPS-N Alexandria-Class Corvette, Makteba Custom",
-      color:"albatross",
-      subliner:true
-    }
-  ]
-
-  landmarkMarkerData: Landmark[] = [
-    {
-      name: "Edibiri Omninode",
-      class: "UOB Central Omninode",
-      position: [400,400],
-      faction:"Union Navy"
-    },
-    {
-      name: "Uinta Station",
-      class: "House of Stone/Sand Blink Gate",
-      position: [-300,300],
-      faction:"Union Navy",
-      landmarkType:"station",
-      description:`The system of Apherion was the second Karrakin system to recieve a blink gate in 3218u, serving the worlds of Khayradin and Tilimsan. Uinta Station soon became 
-      the busiest port within Union space, with thousands of ships passing through its gate daily, ferrying millions of tonnes of resources to and from the resource-rich worlds and moons
-      of Apherion, lining the pockets of Hagiographic nobility.
-            
-      Across its six habitation rings, the station is home to over three million Karrakin citizens, facilitating the station's operations across its many bazaars, refineries, and brokerages. 
-      After Baronic Unified Command's sudden assault to take control of the station, the Stonelord has put the full focus of the station into returning the shipyard to full strength to replenish 
-      the Baronic Navy's depleted fleets. During the Uinta Station Incident, the station's blinkspace capabilities were significantly damaged, and will take months of repairs from specialized 
-      engineers to return to full operation. Until then, Stonelord Cannamos and his naval forces are trapped in the system, and have since put his focus into rebuilding strength and pacifying
-      opposing factions on Khayradin.
-
-      `
-    },
-    {
-      name: "Bastion diKhayradi",
-      class: "House of Stone Orbital Defence Platform",
-      position: [50,-50],
-      faction:"House of Stone",
-      landmarkType:"station",
-    }
-  ]
+  landmarkMarkerData: Landmark[] = landmarkMarkerData
 
 
   @ViewChild(MapComponentComponent) mapComponent!: MapComponentComponent
@@ -215,6 +152,24 @@ export class AppComponent {
       this.activeShip = null
     }
     
+  }
+  
+  displayLegend(){
+    if(this.tabIdx == 4 && this.isExpanded && !this.activeShip){
+      this.isExpanded = false
+    }
+    else{
+      this.tabIdx = 4
+      this.isExpanded = true
+      this.activeShip = null
+    }
+  }
+
+  displayPharosInfo(){
+    let dialogRef = this.dialog.open(PharosInfoComponent, {
+      height: '400px',
+      width: '600px',
+    });
   }
 
   getActiveShipIcon(){

@@ -145,17 +145,15 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       </svg>
       <!--fill:rgb(100%,25%,40%);-->
   
-      `
-
-     
-      
+      `      
 
       let icon:L.DivIcon = new L.DivIcon({
         html: shipHTML,
         shadowSize: [0, 0],
+        iconSize: [size,size],
+        iconAnchor: ship?.subliner ? [5,60] : [7,64],
         className:""
       });
-
      
       this.markers.push(L.marker(ship.position,{ icon: icon,title:ship.name })
       .setRotationAngle(ship.rotation)
@@ -186,8 +184,11 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       let htmlLandmarkIcon = new L.DivIcon({
         html: landmark?.landmarkType==="station" ? landmarkCrossHtml : landmarkHtml,
         shadowSize:[0,0],
+        iconSize:landmark?.landmarkType==="station" ? [36,36] : [24,24],
+        iconAnchor:landmark?.landmarkType==="station" ? [18,72] : [12,48],
         className:''
       })
+
       this.markers.push(L.marker(landmark.position,{icon:htmlLandmarkIcon,title:landmark.name})
       .on("click",(e)=>{
         this.onLandmarkClick(e)
@@ -200,7 +201,7 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       //marker.setRotationAngle(45)
     });
 
-    var circle = L.circle([200,-200], {
+    L.circle([200,-200], {
       color: 'red',
       fillColor: '#f03',
       fillOpacity: 0.5,

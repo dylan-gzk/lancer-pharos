@@ -15,6 +15,10 @@
         <button mat-icon-button matTooltip="Vessels" (click)="displayVessels()" class="{{tabIdx==3 && isExpanded ? '!text-[#08d2d2] !bg-[#1e3f3f]': '!text-slate-200'}} sidebar-pharos-buttons flex flex-col">
             <mat-icon matListItemIcon class="self-center">rocket_launch</mat-icon>
         </button>
+
+        <button mat-icon-button matTooltip="Legend" (click)="displayLegend()" class="{{tabIdx==4 && isExpanded ? '!text-[#08d2d2] !bg-[#1e3f3f]': '!text-slate-200'}} sidebar-pharos-buttons flex flex-col">
+            <mat-icon matListItemIcon class="self-center">compass_calibration</mat-icon>
+        </button>
         
         
     </div>
@@ -47,7 +51,7 @@
                                 </div>
                                 <div>
                                     Khayradin is one of the largest known worlds suitable for human life, with a population of over 50 billion between its surface, orbital stations, and
-                                    moons. Previously under House of Stone control, the system erupted into conflict after the Uinta Station Incident, as well as the outbreak of hostilities
+                                    moons. Previously under Hagiographic control, the system erupted into conflict after the Uinta Station Incident, as well as the outbreak of hostilities
                                     in orbit around Free Sanjak. With Uinta Station out of commission, and a Union Relief Fleet years away, the future of this theatre is unknown.
                                 </div>
                             </div>
@@ -62,7 +66,7 @@
 
                         <hr>
 
-                        <div class="px-4 pt-4 text-white flex flex-col space-y-2">
+                        <div class="px-4 pt-4 text-slate-200 flex flex-col space-y-2">
                             <div class="flex flex-row items-center space-x-2">
                                 <mat-icon matListItemIcon class="self-center !h-8 !w-8 text-red-500" svgIcon="union"></mat-icon>
                                 <div>
@@ -154,18 +158,21 @@
                                 </div>
             
                                 <hr>
+                                <div class="space-y-2">
 
-                                <ng-container *ngFor="let ship of shipMarkerData">
-                                    <div class="text-slate-200 ">
-                                        <div>
-                                            {{ship?.name}}
+                                
+                                    <ng-container *ngFor="let ship of shipMarkerData">
+                                        <div class="text-slate-200 ">
+                                            <div>
+                                                {{ship?.name}}
+                                            </div>
+                                            <div class="text-slate-400">
+                                                {{ship?.class}}
+                                            </div>
+                                            
                                         </div>
-                                        <div class="text-slate-400">
-                                            {{ship?.class}}
-                                        </div>
-                                        
-                                    </div>
-                                </ng-container>
+                                    </ng-container>
+                                </div>
                             </div>
                         </ng-container>
 
@@ -202,6 +209,14 @@
                         </ng-template>
                         
                     </mat-tab>
+
+                    <mat-tab [tabIndex]="4">
+                        <div class="pl-2">
+                            <span class="text-slate-200">Legend</span>
+                            
+                        </div>
+
+                    </mat-tab>
                     
                 </mat-tab-group>
 
@@ -215,6 +230,16 @@
 
 
     </mat-drawer-container>
+</div>
+
+<div class="bg-zinc-900 text-slate-200 h-[5%] flex flex-row justify-end items-center">
+    <button mat-icon-button matTooltip="Info" (click)="displayPharosInfo()" class="!text-slate-200 sidebar-pharos-buttons flex flex-col">
+        <mat-icon matListItemIcon class="self-center">info</mat-icon>
+    </button>
+
+    <div class="font-['Mina'] pr-2">
+        Logged in as: KTB-Akagi-01
+    </div>
 </div>
 
 
