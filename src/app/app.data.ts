@@ -12,13 +12,13 @@ export const shipMarkerData: Ship[] =  [
           color:"union"
         }  ,
         {
-          name:"PCV-SL Atalanta",
+          name:"HG-CC Seneschal's Might",
           rotation:12,
           position: [-200,200],
-          faction:"Harrison Armory",
-          battlegroup:"???",
-          class:"HA Wagner-Class Corvette",
-          color:"ha"
+          faction:"Hagiographic Coalition",
+          battlegroup:"Armada-2 Khayradin",
+          class:"FKS Calendula-Class Battlecruiser",
+          color:"ktb"
         },
         {
           name:"C-HK Auburn Heart",
@@ -40,15 +40,15 @@ export const shipMarkerData: Ship[] =  [
           subliner:true
         },
         {
-            name:"KTB-LS Akagi",
-            rotation:-115,
-            position: [350,280],
-            faction:"Alpha Core Squadron",
-            battlegroup:"Alpha Core Squadron",
-            class:"SSC Kusanagi-Class Troop Carrier",
-            color:"albatross",
-            subliner:true
-          }
+          name:"KTB-LS Akagi",
+          rotation:-115,
+          position: [350,280],
+          faction:"Alpha Core Squadron",
+          battlegroup:"Alpha Core Squadron",
+          class:"SSC Kusanagi-Class Troop Carrier",
+          color:"alpha",
+          subliner:true
+        }
       ]
     
 export const landmarkMarkerData: Landmark[] = [
@@ -80,8 +80,17 @@ export const landmarkMarkerData: Landmark[] = [
           name: "Bastion diKhayradi",
           class: "House of Stone Orbital Defence Platform",
           position: [50,-50],
-          faction:"House of Stone",
+          faction:"Hagiographic Coalition",
           landmarkType:"station",
+        },
+        {
+          name:"Amasra",
+          class:"House Altia Capital",
+          position:[310,-210],
+          faction:"",
+          landmarkType:"city",
+          description:"The ancient mountain fortress capital of House Altia."
+
         }
       ]
 
@@ -106,5 +115,6 @@ export const logos: Record<string,string> = {
     "Harrison Armory":'armory',
     "SSC":'ssc',
     "Albatross":"albatross",
-    "Alpha Core Squadron":"alpha"
+    "Alpha Core Squadron":"alpha",
+    "Hagiographic Coalition":"barony"
 }

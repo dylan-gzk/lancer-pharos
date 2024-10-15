@@ -232,14 +232,25 @@
     </mat-drawer-container>
 </div>
 
-<div class="bg-zinc-900 text-slate-200 h-[5%] flex flex-row justify-end items-center">
-    <button mat-icon-button matTooltip="Info" (click)="displayPharosInfo()" class="!text-slate-200 sidebar-pharos-buttons flex flex-col">
-        <mat-icon matListItemIcon class="self-center">info</mat-icon>
-    </button>
-
-    <div class="font-['Mina'] pr-2">
-        Logged in as: KTB-Akagi-01
+<div class="bg-zinc-900 text-slate-200 h-[5%] flex flex-row justify-between items-center font-['Mina']">
+    <div class="flex flex-col">
+        <div>
+            Destination: Amasra // ETA: 6 HR 15 MIN // LOCAL TIME: 27:21:17 PM
+        </div>
+        <div>
+            Flight Plan ID: AKG-8a8d-11ef
+        </div>
     </div>
+    <div class="flex flex-row items-center">
+        <button mat-icon-button matTooltip="Info" (click)="displayPharosInfo()" class="!text-slate-200 sidebar-pharos-buttons flex flex-col">
+            <mat-icon matListItemIcon class="self-center">info</mat-icon>
+        </button>
+    
+        <div class="pr-2">
+            Logged in as: KTB-Akagi-01
+        </div>
+    </div>
+   
 </div>
 
 

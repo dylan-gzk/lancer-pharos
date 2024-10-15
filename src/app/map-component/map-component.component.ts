@@ -20,7 +20,9 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     ["ssc","b8860b"],
     ["ha","a632a8"],
     ["albatross","96c5d6"],
-    ["union","ed3f39"]
+    ["union","ed3f39"],
+    ["ktb","C084FC"],
+    ["alpha","D70040"]
     ])
 
   color:string | undefined = undefined;
@@ -178,11 +180,18 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       </svg>
     `
 
+    let cityHtml = `
+    <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <svg width="36px" height="36px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path style="stroke:#0eBFFF;fill-rule:nonzero;fill:none;fill-opacity:1;" d="M16.9999 7.00009L14.2625 4.26268C13.4705 3.47065 13.0745 3.07463 12.6178 2.92626C12.2161 2.79574 11.7834 2.79574 11.3817 2.92626C10.9251 3.07463 10.5291 3.47065 9.73703 4.26268L6.99973 6.99998M16.9999 7.00009L19.7371 9.73727C20.5291 10.5293 20.9251 10.9253 21.0735 11.382C21.204 11.7837 21.204 12.2164 21.0735 12.618C20.9251 13.0747 20.5291 13.4707 19.7371 14.2628L16.9998 17M16.9999 7.00009L6.99973 17M6.99973 17L9.73703 19.7373C10.5291 20.5294 10.9251 20.9254 11.3817 21.0738C11.7834 21.2043 12.2161 21.2043 12.6178 21.0738C13.0745 20.9254 13.4705 20.5294 14.2625 19.7373L16.9998 17M6.99973 17L4.26244 14.2628C3.47041 13.4707 3.07439 13.0747 2.92601 12.618C2.7955 12.2164 2.7955 11.7837 2.92601 11.382C3.07439 10.9253 3.47041 10.5293 4.26244 9.73727L6.99973 6.99998M16.9998 17L6.99973 6.99998" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    `
+
     
 
     this.landmarkData.forEach((landmark) => {
       let htmlLandmarkIcon = new L.DivIcon({
-        html: landmark?.landmarkType==="station" ? landmarkCrossHtml : landmarkHtml,
+        html: landmark?.landmarkType==="station" ? landmarkCrossHtml : landmark?.landmarkType==="city" ? cityHtml : landmarkHtml,
         shadowSize:[0,0],
         iconSize:landmark?.landmarkType==="station" ? [36,36] : [24,24],
         iconAnchor:landmark?.landmarkType==="station" ? [18,72] : [12,48],
@@ -226,7 +235,10 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     .addTo(this.map);
 
     
-
+    new L.Polyline([[350,275],[308,-195]],{
+      "dashArray":[10,20],
+      "weight":3,
+    }).addTo(this.map)
 
 
     this.map.on("zoomend",(event) => {
