@@ -122,7 +122,7 @@ export const landmarkMarkerData: Landmark[] = [
           landmarkType:"station",
           description:`The system of Apherion was the second Karrakin system to recieve a blink gate in 3218u, serving the worlds of Khayradin and Tilimsan. Uinta Station soon became the busiest port within Union space, with thousands of ships passing through its gate daily, ferrying millions of tonnes of resources to and from the resource-rich worlds and moons of Apherion, lining the pockets of Hagiographic nobility.
                 
-          Across its six habitation rings, the station is home to over three million Karrakin citizens, facilitating the station's operations across its many bazaars, refineries, and brokerages. After Baronic Unified Command's sudden assault to take control of the station, the Stonelord has put the full focus of the station into returning the shipyard to full strength to replenish the Baronic Navy's depleted fleets. During the Uinta Station Incident, the station's blinkspace capabilities were significantly damaged, and will take months of repairs from specialized engineers to return to full operation. Until then, Stonelord Cannamos and his naval forces are trapped in the system, and have since put his focus into rebuilding strength and pacifying local opposing factions on Khayradin.
+          Across its six habitation rings, the station is home to over three million citizens both Karrakin and Union, facilitating the station's operations across its many bazaars, refineries, and brokerages. After Baronic Unified Command's sudden assault to take control of the station, the Stonelord has put the full focus of the station into returning the shipyard to full strength to replenish the Baronic Navy's depleted fleets. During the Uinta Station Incident, the station's blinkspace capabilities were significantly damaged, and will take months of repairs from specialized engineers to return to full operation. Until then, Stonelord Cannamos and his naval forces are trapped in the system, and have since put his focus into rebuilding strength and pacifying local opposing factions on Khayradin.
     
           `
         },
@@ -132,6 +132,10 @@ export const landmarkMarkerData: Landmark[] = [
           position: [50,-50],
           faction:"Hagiographic Coalition",
           landmarkType:"station",
+          description:`Bastion diKhayradi, named for the oldest noble house of Khayradin, serves as the planet's largest orbital defence platform. Officially known as Polar Defence Installation-1, the station is networked with a constellation of other nearby defence platforms, and is the Baronic Navy's key strategic port within the Apherion system for repair and retrofitting.
+          
+          The station also acts as the secondary garrison for the House Company of House diKhayradi, the Ixoran Guard. It currently hosts the Hagiographic Coalition's combined forces, bolstered by a full century deployed by Boulder Company.
+          `
         },
         {
           name: "Plumeria Station",
@@ -139,7 +143,7 @@ export const landmarkMarkerData: Landmark[] = [
           position: [350,-350],
           faction:"???",
           landmarkType:"station",
-          description:"Major logistics station located at Apherion-Khayradin Lagrange 4. "
+          description:"Major logistics station located at Apherion-Khayradin Lagrange 4. The Royal Karrakin Foundries have built a major weapons testing and research laboratory here, specialized in orbital and anti-orbital defence technologies and some experimental paracausal research."
         },
         {
           name:"Amasra",
@@ -148,7 +152,6 @@ export const landmarkMarkerData: Landmark[] = [
           faction:"",
           landmarkType:"city",
           description:"The ancient mountain fortress capital of House Altia."
-
         }
       ]
 
@@ -174,5 +177,6 @@ export const logos: Record<string,string> = {
     "SSC":'ssc',
     "Albatross":"albatross",
     "Alpha Core Squadron":"alpha",
-    "Hagiographic Coalition":"barony"
+    "Hagiographic Coalition":"barony",
+    "Ungrateful":"ungrateful"
 }
