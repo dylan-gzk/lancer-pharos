@@ -22,7 +22,8 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     ["albatross","96c5d6"],
     ["union","ed3f39"],
     ["ktb","C084FC"],
-    ["alpha","D70040"]
+    ["alpha","D70040"],
+    ["cot","36BA98"]
     ])
 
   color:string | undefined = undefined;
@@ -111,6 +112,11 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     this.map.on('drag', (map) => {
       map.target.panInsideBounds(bounds, { animate: false });
     });
+  }
+
+  onVesselClick(ship:Ship){
+    this.map.flyTo(ship.position,2)
+    this.mapClickEmitter.emit(ship.name)
   }
 
   onClick(event:L.LeafletMouseEvent){

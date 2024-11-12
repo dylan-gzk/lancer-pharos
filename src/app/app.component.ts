@@ -63,7 +63,8 @@ export class AppComponent {
     "triangle": "assets/triangle.svg",
     "star": "assets/star.svg",
     "spear":"assets/spear.svg",
-    "alpha":"assets/alpha.svg"
+    "alpha":"assets/alpha.svg",
+    "ungrateful":"assets/ungrateful.svg"
 
   }
 
@@ -90,8 +91,11 @@ export class AppComponent {
     this.mapComponent.map.flyTo([0,0],2)
   }
 
+  handleVesselMenuClick(ship:Ship){
+    this.mapComponent.onVesselClick(ship)
+  }
+
   handleMapClick(event:string){
-    console.log(event)
     this.displayVessels()
     this.activeShip = this.shipMarkerData.find(e => e.name === event) || null
     this.tabIdx=3
@@ -138,6 +142,7 @@ export class AppComponent {
     else{
       this.tabIdx = 2
       this.isExpanded = true
+      this.activeLandmark = null
     }
    
   }

@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "page-deploy":"ng deploy --repo=https://github.com/dylan-gzk/lancer-pharos"
+    "page-deploy": "ng deploy --repo=https://github.com/dylan-gzk/lancer-pharos"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +25,7 @@
     "leaflet": "^1.9.4",
     "leaflet-rotatedmarker": "^0.2.0",
     "ng-leaflet-universal": "^15.2.8",
+    "npm": "^10.9.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

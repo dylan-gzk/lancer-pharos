@@ -1,4 +1,4 @@
-<div class="flex flex-row">
+<div class="flex flex-row h-[92%]">
     <div class="flex flex-col space-y-4 items-center bg-zinc-900 border border-r-1 border-l-0 border-y-0 border-slate-200 max-w-min px-2 pt-2">
         <button mat-icon-button matTooltip="System Information" (click)="displayInfo()" class="{{tabIdx==0 && isExpanded ? '!text-[#08d2d2] !bg-[#1e3f3f]': '!text-slate-200'}} sidebar-pharos-buttons flex flex-col">
             <mat-icon matListItemIcon class="self-center">info</mat-icon>
@@ -32,28 +32,34 @@
                                 KHAYRADIN
                             </div>
                             <div>
-                                KHAYRADIN//APHERION-3
+                                KHAYRADIN//APHERION-4
                             </div>
-                            
-                            <hr>
+                                                        
                             <div class="place-self-center">
                                 <mat-chip-set>
                                     <mat-chip class="!bg-white !text-white">Contested Space</mat-chip>
                                 </mat-chip-set>
                             </div>
-                            <div>
-                                Registered Vessels
-                            </div>
+                            
                             <hr>
+                            
                             <div>
                                 <div class="text-xs text-slate-200">
                                     Information
                                 </div>
-                                <div>
-                                    Khayradin is one of the largest known worlds suitable for human life, with a population of over 50 billion between its surface, orbital stations, and
+                                <div class="text-[14px]">
+                                    Khayradin, located in the Apherion system, is one of the largest known worlds suitable for human life, with a population of over 50 billion between its surface, orbital stations, and
                                     moons. Previously under Hagiographic control, the system erupted into conflict after the Uinta Station Incident, as well as the outbreak of hostilities
-                                    in orbit around Free Sanjak. With Uinta Station out of commission, and a Union Relief Fleet years away, the future of this theatre is unknown.
+                                    in orbit around Free Sanjak.
+                                    <br>
+                                    <br>
+                                    It's sister world, Tilimsan, lies significantly closer to the star of Apherion, and is best known for both its harsh deserts and towering polar arcologies. Firmly under the control of the House of Sand,
+                                    its largest houses have pledged their might to eliminate insurgents who threaten the prosperity of the Baronies.
+                                    <br>
+                                    <br>
+                                    With Uinta Station out of commission, and a Union Relief Fleet years away, the future of this theatre is unknown.
                                 </div>
+                                
                             </div>
                             
                         </div>
@@ -91,7 +97,7 @@
                             <div class="flex flex-row items-center space-x-2">
                                 <mat-icon matListItemIcon class="self-center !h-8 !w-8 text-yellow-400" svgIcon="ssc"></mat-icon>
                                 <div>
-                                    Smith-Shimano Corpro
+                                    Smith-Shimano Corpro / House of Moments
                                 </div>
                             </div>
 
@@ -99,6 +105,13 @@
                                 <mat-icon matListItemIcon class="self-center !h-8 !w-8 text-orange-400" svgIcon="spear"></mat-icon>
                                 <div>
                                     Children Of Tyrannus
+                                </div>
+                            </div>
+
+                            <div class="flex flex-row items-center space-x-2">
+                                <mat-icon matListItemIcon class="!h-8 !w-8 text-sky-600" svgIcon="ungrateful"></mat-icon>
+                                <div>
+                                    Ungratefuls
                                 </div>
                             </div>
 
@@ -115,6 +128,22 @@
                             </div>
         
                             <hr>
+
+                            <div class="pl-2 pt-2">
+                                <ng-container *ngFor="let landmark of landmarkMarkerData">
+                                    <div class="text-slate-200 ">
+                                        <div>
+                                            {{landmark?.name}}
+                                        </div>
+                                        <div class="text-slate-400">
+                                            {{landmark?.class}}
+                                        </div>
+                                        
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            
                         </ng-container>
 
                         <ng-template #landmarkDetails>
@@ -162,7 +191,7 @@
 
                                 
                                     <ng-container *ngFor="let ship of shipMarkerData">
-                                        <div class="text-slate-200 ">
+                                        <div class="text-slate-200" (click)="handleVesselMenuClick(ship)">
                                             <div>
                                                 {{ship?.name}}
                                             </div>
@@ -205,6 +234,36 @@
                                         {{activeShip?.homeport}}
                                     </div>
                                 </div>
+
+                                <div class="text-slate-200 text-[14px]">
+                                    <div *ngIf="activeShip?.description">
+                                        {{activeShip?.description}}
+                                    </div>    
+                                </div>
+
+                                <ng-container *ngIf="activeShip?.pilots">
+                                    <span class="text-slate-200">Pilots</span>
+                                    <div *ngFor="let pilot of activeShip?.pilots" class="gap-y-4">
+                                        <div>
+                                            <div class="text-slate-400">
+                                                {{pilot.name}} — 
+                                                <span class="font-mono {{pilot?.callsignColor || ''}}">
+                                                    {{pilot.callsign}}
+                                                </span>
+                                            </div>
+    
+                                            <div class="text-slate-400 pl-4">
+                                                {{pilot.frame}} — 
+                                                <span class="font-mono {{pilot?.callsignColor || ''}}">
+                                                    {{pilot.frameName}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        
+                                </ng-container>
+
+                                
                             </div>
                         </ng-template>
                         
@@ -232,13 +291,13 @@
     </mat-drawer-container>
 </div>
 
-<div class="bg-zinc-900 text-slate-200 h-[5%] flex flex-row justify-between items-center font-['Mina']">
+<div class="bg-zinc-900 text-slate-200 h-[8%] flex flex-row justify-between items-center font-['Mina'] pl-1">
     <div class="flex flex-col">
         <div>
-            Destination: Amasra // ETA: 6 HR 15 MIN // LOCAL TIME: 27:21:17 PM
+            Current Location: Amasra, House Altia, Northern Hemisphere Khayradin // LOCAL TIME: 07:37:44 PM
         </div>
         <div>
-            Flight Plan ID: AKG-8a8d-11ef
+            Flight Plan ID: AKG-1e95-46bd
         </div>
     </div>
     <div class="flex flex-row items-center">

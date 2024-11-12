@@ -7,6 +7,9 @@ export interface Ship {
     class:string
     homeport?:string
     subliner?:boolean
+    description?:string
+    cargo?:string
+    pilots?:Pilot[]
     color:string
 }
 
@@ -17,4 +20,13 @@ export interface Landmark {
     faction:string
     landmarkType?:string
     description?:string
+}
+
+export interface Pilot{
+    name:string
+    callsign:string
+    callsignColor?:string
+    frame:string
+    frameName:string
+    
 }
